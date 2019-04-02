@@ -1,3 +1,10 @@
+/**
+ * @algorithm
+ * 1. Generate a high level graph with approximately `numOfNodes/4` nodes
+ * 2. Generate a component in each graph
+ * 3. Connect Components using pythogorean minDist function
+ */
+
 var numOfNodes = 10;
 var density = 1;
 var nodeSize = 2;
