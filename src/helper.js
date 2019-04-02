@@ -23,3 +23,27 @@ function minDistance(componentA, componentB) {
     }
     return ans;
 }
+
+/**
+ * @copyright John Page, adapted from https://www.mathopenref.com/coordpolycalc.html
+ * @param {Number} cx The center of the polygon 
+ * @param {Number} cy The center of the polygon 
+ * @param {Number} n  Num of Sides
+ * @param {Number} r  Radius of the polygon
+ */
+function calcVertices(cx, cy, n, r) {
+    //calculate angles
+    centerAng = 2 * Math.PI / n;
+    startAng  = n%2 ? Math.PI/2 : Math.PI/2 - centerAng/2;
+
+    //create a vertex array
+    var vertex = new Array();
+    for (var i = 0; i < n; i++) {
+        let ang = startAng + (i * centerAng);
+        let vx = Math.round(cx + r * Math.cos(ang));
+        let vy = Math.round(cy - r * Math.sin(ang));
+        vertex.push({ x: vx, y: vy });
+    }
+
+    return vertex;
+}

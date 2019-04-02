@@ -11,19 +11,19 @@ var density = 1;
 var nodeSize = 2;
 var arrowSize =  20;
 var edgeThreshold = 0.5;
-var nodes = [];
-var edges = [];
+var nodes = new Array();
+var edges = new Array();
 
 // Generate high level graph
 for(var i = 0; i < numOfNodes; i++) {
-    nodes[i] = {
+    nodes.push({
         id: 'n' + i,
         label: i,
         x: Math.random(),
         y: Math.random(),
         size: nodeSize,
         color: "#ec5148" //#eeeeee
-    }
+    });
 }
 
 for( var i = 0; i < numOfNodes; i++) {
@@ -43,7 +43,7 @@ for( var i = 0; i < numOfNodes; i++) {
 }
 
 // Generate Components
-var components = [];
+var components = new Array();
 var availableNodes = numOfNodes;
 nodes.forEach( (node, index) => {
     var type = componentType[ Math.floor(Math.random * componentType.length) ];
@@ -54,7 +54,7 @@ nodes.forEach( (node, index) => {
         nodeCount = maxNodesPerComponent;
     } 
     availableNodes -= nodeCount;
-    components[index] = new component(type, nodeCount, node);
+    components.push(new component(type, nodeCount, node));
 });
 
 // Connect Components

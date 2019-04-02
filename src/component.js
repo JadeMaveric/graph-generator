@@ -1,4 +1,4 @@
-componentType = ["Line, Polygon, Tree"];
+componentType = ["Line, Polygon"];
 
 /**
  * Components are a collection of nodes and edges that build up a graph
@@ -19,8 +19,8 @@ class component {
     }
 */
     constructor( type, numOfNodes, refNode ) {
-        this.node = [];
-        this.edge = [];
+        this.node = new Array();
+        this.edge = new Array();
         this.refX = refNode.x;
         this.refY = refNode.y;
 
@@ -33,21 +33,28 @@ class component {
                     var x = stepSize * i;
                     var y = m*x;
 
-                    this.node[i] = {
+                    this.node.push({
                         id: 'n' + i,
                         label: i,
                         x: x + refX,
                         y: y + refY,
                         size: nodeSize,
-                        color: "#ec5148" //#eeeeee
-                    }
+                        color: "#ec5148"
+                    });
                 }
                 break;
             case "Polygon":
-                var n = numOfNodes;
-                
-                break;
-            case "Tree":
+                let vertices = calcVertices(refX, refY, numOfNodes, Math.random()*0.1);
+                vertices.forEach( (vertex, i) => {
+                    this.node.push({
+                        id: 'n' + i,
+                        label: i,
+                        x: vertex.x,
+                        y: vertex.y,
+                        size: nodeSize,
+                        color: "#ec5148"
+                    });
+                });
                 break;
         }
     }
