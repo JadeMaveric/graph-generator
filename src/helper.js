@@ -1,16 +1,3 @@
-// A component is a collection of nodes and edges
-class component {
-    constructor() {
-        this.node = [];
-        this.edge = [];
-    }
-
-    constructor( nodes, edges ) {
-        this.node = nodes;
-        this.edge = edges;
-    }
-}
-
 /**
  * Returns the nodes which have the shortest distance between the 2 components
  * @param {component} componentA 

@@ -6,6 +6,7 @@
  */
 
 var numOfNodes = 4;
+var maxNodesPerComponent = 4;
 var density = 1;
 var nodeSize = 2;
 var arrowSize =  20;
@@ -13,6 +14,7 @@ var edgeThreshold = 0.5;
 var nodes = [];
 var edges = [];
 
+// Generate high level graph
 for(var i = 0; i < numOfNodes; i++) {
     nodes[i] = {
         id: 'n' + i,
@@ -39,6 +41,24 @@ for( var i = 0; i < numOfNodes; i++) {
         }
     }
 }
+
+// Generate Components
+var components = [];
+var availableNodes = numOfNodes;
+nodes.forEach( (node, index) => {
+    var type = componentType[ Math.floor(Math.random * componentType.length) ];
+    var nodeCount = (numOfNodes * Math.random);
+    if( nodeCount > availableNodes ) {
+        nodeCount = availableNodes;
+    } else if ( nodeCount > maxNodesPerComponent ) {
+        nodeCount = maxNodesPerComponent;
+    } 
+    availableNodes -= nodeCount;
+    components[index] = new component(type, nodeCount, node);
+});
+
+// Connect Components
+
 
 sigma.classes.graph.addMethod('neighbors', function(nodeId) {
     var k,
