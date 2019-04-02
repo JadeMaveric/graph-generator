@@ -29,15 +29,15 @@ for(var i = 0; i < numOfNodes; i++) {
 for( var i = 0; i < numOfNodes; i++) {
     for( var j = 0; j < numOfNodes; j++) {
         let generateEdge = Math.random() > edgeThreshold;
-        console.log("%d to %d: ", i, j, generateEdge );
+        //console.log("%d to %d: ", i, j, generateEdge );
         if( generateEdge ) {
-            edges[j + i * numOfNodes] = {
+            edges.push({
                 id: 'e' + i + 'to' + j,
                 source: 'n' + i,
                 target: 'n' + j,
                 type: "arrow",
                 size: arrowSize 
-            }
+            });
         }
     }
 }
@@ -79,6 +79,7 @@ edges.forEach( edge => s.graph.addEdge(edge) );
 
 s.refresh();
 
+// Click a node to highlight neighbours
 s.graph.nodes().forEach( node => node.originalColor = node.color );
 s.graph.edges().forEach( edge => edge.originalColor = edge.color );
 
