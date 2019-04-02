@@ -5,10 +5,11 @@
  * 3. Connect Components using pythogorean minDist function
  */
 
-var numOfNodes = 10;
+var numOfNodes = 4;
 var density = 1;
 var nodeSize = 2;
 var arrowSize =  20;
+var edgeThreshold = 0.5;
 var nodes = [];
 var edges = [];
 
@@ -25,7 +26,7 @@ for(var i = 0; i < numOfNodes; i++) {
 
 for( var i = 0; i < numOfNodes; i++) {
     for( var j = 0; j < numOfNodes; j++) {
-        let generateEdge = Math.random() > 0.8;
+        let generateEdge = Math.random() > edgeThreshold;
         console.log("%d to %d: ", i, j, generateEdge );
         if( generateEdge ) {
             edges[j + i * numOfNodes] = {
@@ -53,19 +54,13 @@ sigma.classes.graph.addMethod('neighbors', function(nodeId) {
 
 var s = new sigma('container');
 
-for( nodeIndex in nodes ) { 
-    s.graph.addNode(nodes[nodeIndex]);
-}
-for( edgeIndex in edges ) { 
-    s.graph.addEdge(edges[edgeIndex]);
-}
+nodes.forEach( node => s.graph.addNode(node) );
+edges.forEach( edge => s.graph.addEdge(edge) );
 
-s.graph.nodes().forEach(function(n) {
-    n.originalColor = n.color;
-});
-s.graph.edges().forEach(function(e) {
-    e.originalColor = e.color;
-});
+s.refresh();
+
+s.graph.nodes().forEach( node => node.originalColor = node.color );
+s.graph.edges().forEach( edge => edge.originalColor = edge.color );
 
 s.bind('clickNode', function(e) {
     var nodeId = e.data.node.id
@@ -100,5 +95,3 @@ s.bind('clickStage', function(e) {
 
     s.refresh();
 });
-
-s.refresh();
