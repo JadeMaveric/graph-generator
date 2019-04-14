@@ -108,5 +108,7 @@ s.bind('clickStage', function(e) {
 
 s.refresh();
 
-s.startForceAtlas2();
+s.startForceAtlas2({
+  gravity: 2
+});
 window.setTimeout( ()=>s.killForceAtlas2(), 500 );
