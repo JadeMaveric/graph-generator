@@ -1,9 +1,9 @@
-componentType = ["Line, Polygon"];
+componentType = ["Line", "Polygon"];
 
 /**
  * Components are a collection of nodes and edges that build up a graph
  */
-class component {
+class Component {
 /*    constructor() {
         this.node = [];
         this.edge = [];
@@ -18,7 +18,8 @@ class component {
         this.refY = 0.5;
     }
 */
-    constructor( type, numOfNodes, refNode ) {
+    constructor( type, numOfNodes, refNode, refId ) {
+        this.type = type,
         this.nodes = new Array();
         this.edges = new Array();
         this.refX = refNode.x;
@@ -28,27 +29,27 @@ class component {
         // Generate nodes based on type
         switch( type ) {
             case "Line":
-                var m = Math.random();
-                var stepSize = Math.random();
-                for(var i = 0; i < numOfNodes; i++) {
-                    var x = stepSize * i;
-                    var y = m*x;
-
+                let m = Math.random();
+                let stepSize = Math.random();
+                for(let i = 0; i < numOfNodes; i++) {
+                    let x = stepSize * i;
+                    let y = m*x;
+                    
                     this.nodes.push({
-                        id: 'n' + i,
+                        id: refId + 'n' + i,
                         label: i,
-                        x: x + refX,
-                        y: y + refY,
+                        x: x + this.refX,
+                        y: y + this.refY,
                         size: nodeSize,
                         color: "#ec5148"
                     });
                 }
                 break;
             case "Polygon":
-                let vertices = calcVertices(refX, refY, numOfNodes, Math.random()*0.1);
+                let vertices = calcVertices(this.refX, this.refY, numOfNodes, Math.random()*0.1);
                 vertices.forEach( (vertex, i) => {
                     this.nodes.push({
-                        id: 'n' + i,
+                        id: refId + 'n' + i,
                         label: i,
                         x: vertex.x,
                         y: vertex.y,
@@ -60,20 +61,20 @@ class component {
         }
 
         // Generate edges
-        for( var i = 0; i < nodes.length; i++) {
-            for( var j = 0; j < nodes.length; j++) {
+        this.nodes.forEach( src => {
+            this.nodes.forEach( trg=> {
                 let generateEdge = Math.random() > this.edgeThreshold;
                 if( generateEdge ) {
                     this.edges.push({
-                        id: 'e' + i + 'to' + j,
-                        source: 'n' + i,
-                        target: 'n' + j,
+                        id: src.id + 'to' + trg.id,
+                        source: src.id,
+                        target: trg.id,
                         type: "arrow",
                         size: arrowSize 
                     });
                 }
-            }
-        }
+            })
+        });
     }
 
     

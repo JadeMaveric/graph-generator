@@ -15,7 +15,7 @@ var nodes = new Array();
 var edges = new Array();
 
 // Generate high level graph
-for(var i = 0; i < numOfNodes; i++) {
+for(let i = 0; i < numOfNodes; i++) {
     nodes.push({
         id: 'n' + i,
         label: i,
@@ -26,8 +26,8 @@ for(var i = 0; i < numOfNodes; i++) {
     });
 }
 
-for( var i = 0; i < numOfNodes; i++) {
-    for( var j = 0; j < numOfNodes; j++) {
+for( let i = 0; i < numOfNodes; i++) {
+    for( let j = 0; j < numOfNodes; j++) {
         let generateEdge = Math.random() > edgeThreshold;
         //console.log("%d to %d: ", i, j, generateEdge );
         if( generateEdge ) {
@@ -46,15 +46,16 @@ for( var i = 0; i < numOfNodes; i++) {
 var components = new Array();
 var availableNodes = numOfNodes;
 nodes.forEach( (node, index) => {
-    var type = componentType[ Math.floor(Math.random * componentType.length) ];
-    var nodeCount = (numOfNodes * Math.random);
+    var type = componentType[ Math.floor(Math.random() * (componentType.length)) ];
+    var nodeCount = (numOfNodes * Math.random());
     if( nodeCount > availableNodes ) {
         nodeCount = availableNodes;
     } else if ( nodeCount > maxNodesPerComponent ) {
         nodeCount = maxNodesPerComponent;
     } 
     availableNodes -= nodeCount;
-    components.push(new component(type, nodeCount, node));
+    let component = new Component(type, nodeCount, node, index);
+    components.push(component);
 });
 
 // Connect Components
@@ -74,8 +75,10 @@ sigma.classes.graph.addMethod('neighbors', function(nodeId) {
 
 var s = new sigma('container');
 
-nodes.forEach( node => s.graph.addNode(node) );
-edges.forEach( edge => s.graph.addEdge(edge) );
+components.forEach( component => {
+    component.nodes.forEach( node => s.graph.addNode(node) );
+    component.edges.forEach( edge => s.graph.addEdge(edge) );
+})
 
 s.refresh();
 
