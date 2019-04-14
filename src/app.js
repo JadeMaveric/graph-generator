@@ -5,8 +5,10 @@
  * 3. Connect Components using pythogorean minDist function
  */
 
-var numOfNodes = 4;
+var numOfNodes = 20;
+var numOfComponents = 7;
 var maxNodesPerComponent = 4;
+var maxDistanceBetweenNodes = 0.1;
 var density = 1;
 var nodeSize = 2;
 var arrowSize =  20;
@@ -15,7 +17,7 @@ var nodes = new Array();
 var edges = new Array();
 
 // Generate high level graph
-for(let i = 0; i < numOfNodes; i++) {
+for(let i = 0; i < numOfComponents; i++) {
     nodes.push({
         id: 'n' + i,
         label: i,
@@ -26,8 +28,8 @@ for(let i = 0; i < numOfNodes; i++) {
     });
 }
 
-for( let i = 0; i < numOfNodes; i++) {
-    for( let j = 0; j < numOfNodes; j++) {
+for( let i = 0; i < numOfComponents; i++) {
+    for( let j = 0; j < numOfComponents; j++) {
         let generateEdge = Math.random() > edgeThreshold;
         //console.log("%d to %d: ", i, j, generateEdge );
         if( generateEdge ) {
@@ -47,19 +49,20 @@ var components = new Array();
 var availableNodes = numOfNodes;
 nodes.forEach( (node, index) => {
     var type = componentType[ Math.floor(Math.random() * (componentType.length)) ];
-    var nodeCount = (numOfNodes * Math.random());
-    if( nodeCount > availableNodes ) {
-        nodeCount = availableNodes;
-    } else if ( nodeCount > maxNodesPerComponent ) {
+    var nodeCount = Math.floor((numOfNodes * Math.random()));
+    if ( nodeCount > maxNodesPerComponent ) {
         nodeCount = maxNodesPerComponent;
+    } else if( nodeCount > availableNodes ) {
+        nodeCount = availableNodes;
     } 
     availableNodes -= nodeCount;
-    let component = new Component(type, nodeCount, node, index);
+    let color = componentColor[ Math.floor(Math.random() * (componentColor.length)) ];
+    let component = new Component(index, type, nodeCount, node, color);
     components.push(component);
 });
 
 // Connect Components
-
+// TODO
 
 sigma.classes.graph.addMethod('neighbors', function(nodeId) {
     var k,
@@ -119,3 +122,5 @@ s.bind('clickStage', function(e) {
 
     s.refresh();
 });
+
+console.log(components);

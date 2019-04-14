@@ -1,4 +1,5 @@
 componentType = ["Line", "Polygon"];
+componentColor = ["#EC5148", "#1EEE6D", "#C85AE5", "#E1EA28", "#842EEB", "#EB2E2E"];
 
 /**
  * Components are a collection of nodes and edges that build up a graph
@@ -18,19 +19,22 @@ class Component {
         this.refY = 0.5;
     }
 */
-    constructor( type, numOfNodes, refNode, refId ) {
+    constructor( refId, type, numOfNodes, refNode, color ) {
         this.type = type,
+        this.nodeCount = numOfNodes;
         this.nodes = new Array();
         this.edges = new Array();
         this.refX = refNode.x;
         this.refY = refNode.y;
-        this.edgeThreshold = 0.5;
+        this.index = refId;
+        this.color = color;
+        this.edgeThreshold = 0.3;
 
         // Generate nodes based on type
         switch( type ) {
             case "Line":
-                let m = Math.random();
-                let stepSize = Math.random();
+                let m = Math.random() * 2 - 1;
+                let stepSize = Math.random() * maxDistanceBetweenNodes;
                 for(let i = 0; i < numOfNodes; i++) {
                     let x = stepSize * i;
                     let y = m*x;
@@ -41,11 +45,12 @@ class Component {
                         x: x + this.refX,
                         y: y + this.refY,
                         size: nodeSize,
-                        color: "#ec5148"
+                        color: this.color
                     });
                 }
                 break;
             case "Polygon":
+                
                 let vertices = calcVertices(this.refX, this.refY, numOfNodes, Math.random()*0.1);
                 vertices.forEach( (vertex, i) => {
                     this.nodes.push({
@@ -54,7 +59,7 @@ class Component {
                         x: vertex.x,
                         y: vertex.y,
                         size: nodeSize,
-                        color: "#ec5148"
+                        color: this.color
                     });
                 });
                 break;
@@ -63,7 +68,7 @@ class Component {
         // Generate edges
         this.nodes.forEach( src => {
             this.nodes.forEach( trg=> {
-                let generateEdge = Math.random() > this.edgeThreshold;
+                let generateEdge = Math.random() < this.edgeThreshold;
                 if( generateEdge ) {
                     this.edges.push({
                         id: src.id + 'to' + trg.id,

@@ -39,8 +39,8 @@ function calcVertices(cx, cy, n, r) {
     var vertex = new Array();
     for (var i = 0; i < n; i++) {
         let ang = startAng + (i * centerAng);
-        let vx = Math.round(cx + r * Math.cos(ang));
-        let vy = Math.round(cy - r * Math.sin(ang));
+        let vx = cx + r * Math.cos(ang);
+        let vy = cy - r * Math.sin(ang);
         vertex.push({ x: vx, y: vy });
     }
 
