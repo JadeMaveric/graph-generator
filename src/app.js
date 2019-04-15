@@ -8,6 +8,8 @@ let s = new sigma({
     }
 });
 
+let dragNodesListener = sigma.plugins.dragNodes(s, s.renderers[0]);
+
 let canvas = document.getElementsByClassName("sigma-scene")[0];
 let button = document.getElementById("download-button");
 
