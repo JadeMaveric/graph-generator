@@ -9,13 +9,14 @@ let s = new sigma({
 });
 
 let dragNodesListener = sigma.plugins.dragNodes(s, s.renderers[0]);
-
+let graphNumber = 0;
 let canvas = document.getElementsByClassName("sigma-scene")[0];
 let button = document.getElementById("download-button");
 
 button.addEventListener( 'click', e => {
     let dataURL = canvas.toDataURL('image/png');
     button.href  = dataURL;
+    button.download= "graph" + graphNumber.toString();
 });
 
 function makeGraph() {
@@ -74,6 +75,5 @@ function makeGraph() {
     s.startForceAtlas2({ gravity: 2 });
     window.setTimeout( ()=>s.killForceAtlas2(), simulationTimeout );
 
+    graphNumber++;
 }
-
-
