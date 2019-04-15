@@ -1,4 +1,4 @@
-var s = new sigma({
+let s = new sigma({
     renderer: {
         container: document.getElementById('container'),
         type: 'canvas'
@@ -6,6 +6,14 @@ var s = new sigma({
     settings: {
         minArrowSize: 10
     }
+});
+
+let canvas = document.getElementsByClassName("sigma-scene")[0];
+let button = document.getElementById("download-button");
+
+button.addEventListener( 'click', e => {
+    let dataURL = canvas.toDataURL('image/png');
+    button.href  = dataURL;
 });
 
 function makeGraph() {
@@ -64,4 +72,4 @@ function makeGraph() {
 
 }
 
-makeGraph();
+
