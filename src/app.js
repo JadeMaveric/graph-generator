@@ -37,7 +37,7 @@ function makeGraph() {
             x: Math.random(),
             y: Math.random(),
             size: 0.3,
-            color: '#ec5148'
+            color: '#000000' //'#ec5148'
         });
     }
 
