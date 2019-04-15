@@ -47,14 +47,16 @@ function makeGraph() {
         let isCurved = src==dest;
 
         graph.edges.forEach( e => {
-            if( (e.source == src) && (e.target == dest) ) {
+            // Prevent Multiple edges - NAIVE IMPLEMENTATION
+            while ( (e.source == src) && (e.target == dest) ) {
+                src  = '' + (Math.random() * numOfNodes | 0);
+                dest = '' + (Math.random() * numOfNodes | 0);
+            }
+
+            // Curve Bidirectional Edges
+            if( (e.source == dest) && (e.target == src) ) {
                 isCurved = true;
                 e.type = "curvedArrow";
-                
-                let temp = src;
-                src = dest;
-                dest = temp;
-                
             }
         });
 
