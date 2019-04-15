@@ -22,7 +22,6 @@ button.addEventListener( 'click', e => {
 function makeGraph() {
     let numOfNodes = document.getElementById("num-nodes").value;
     let numOfEdges = document.getElementById("num-edges").value;
-    let simulationTimeout = document.getElementById("sim-timeout").value;
 
     s.graph.clear();
     s.refresh();
@@ -73,7 +72,7 @@ function makeGraph() {
     s.refresh();
 
     s.startForceAtlas2({ gravity: 2 });
-    window.setTimeout( ()=>s.killForceAtlas2(), simulationTimeout );
+    window.setTimeout( ()=>s.killForceAtlas2(), 500 );
 
     graphNumber++;
 }
