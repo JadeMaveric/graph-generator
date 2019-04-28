@@ -1,22 +1,76 @@
 <html>
   <head>
     <title>Graph Generator</title>
-    <script src="/src/sigma/sigma.min.js" type="text/javascript"></script>
+    <script src="src/sigma.core.js"></script>
+    <script src="src/conrad.js"></script>
+    <script src="src/sigma.utils.js"></script>
+    <script src="src/sigma.polyfills.js"></script>
+    <script src="src/sigma.settings.js"></script>
+    <script src="src/sigma.classes.dispatcher.js"></script>
+    <script src="src/sigma.classes.configurable.js"></script>
+    <script src="src/sigma.classes.graph.js"></script>
+    <script src="src/sigma.classes.camera.js"></script>
+    <script src="src/sigma.classes.quad.js"></script>
+    <script src="src/sigma.classes.edgequad.js"></script>
+    <script src="src/sigma.captors.mouse.js"></script>
+    <script src="src/sigma.captors.touch.js"></script>
+    <script src="src/sigma.renderers.canvas.js"></script>
+    <script src="src/sigma.renderers.webgl.js"></script>
+    <script src="src/sigma.renderers.svg.js"></script>
+    <script src="src/sigma.renderers.def.js"></script>
+    <script src="src/sigma.canvas.labels.def.js"></script>
+    <script src="src/sigma.canvas.hovers.def.js"></script>
+    <script src="src/sigma.canvas.nodes.def.js"></script>
+    <script src="src/sigma.canvas.edges.def.js"></script>
+    <script src="src/sigma.canvas.edges.curve.js"></script>
+    <script src="src/sigma.canvas.edges.arrow.js"></script>
+    <script src="src/sigma.canvas.edges.curvedArrow.js"></script>
+    <script src="src/sigma.canvas.edgehovers.def.js"></script>
+    <script src="src/sigma.canvas.edgehovers.curve.js"></script>
+    <script src="src/sigma.canvas.edgehovers.arrow.js"></script>
+    <script src="src/sigma.canvas.edgehovers.curvedArrow.js"></script>
+    <script src="src/sigma.canvas.extremities.def.js"></script>
+    <script src="src/sigma.middlewares.rescale.js"></script>
+    <script src="src/sigma.middlewares.copy.js"></script>
+    <script src="src/sigma.misc.animation.js"></script>
+    <script src="src/sigma.misc.bindEvents.js"></script>
+    <script src="src/sigma.misc.bindDOMEvents.js"></script>
+    <script src="src/sigma.misc.drawHovers.js"></script>
+    
+    <script src="src/sigma.plugins.dragNodes.js"></script>
+    <script src="src/supervisor.js"></script>
+    <script src="src/worker.js"></script>
+    
     <style type="text/css">
       body {
         margin: 0;
       }
       #container {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        width: 600px;
+        height: 500px;
+        border: black solid 1px;
       }
     </style>
   </head>
   <body>
+    <form action="" method="GET" id="inputForm" onsubmit="makeGraph(); return false;">
+      <div class="input-form">  
+        <label for="num-nodes">Number of Nodes: </label>
+        <input type="text" name="num-nodes" id="num-nodes" value="10" required>
+      </div>
+      <div class="input-form">
+        <label for="num-edges">Number of Edges: </label>
+        <input type="text" name="num-edges" id="num-edges" value="20" required>
+      </div>
+      <div class="input-form">
+        <input type="submit" value="Generate">
+        <a href="#" id="download-button" download>Download</a>
+      </div>
+    </form>
+
     <div id="container"></div>
-    <script src="src/helper.js" type="text/javascript"></script>
-    <script src="src/component.js" type="text/javascript"></script>
+    
     <script src="src/app.js" type="text/javascript"></script>
   </body>
 </html>
