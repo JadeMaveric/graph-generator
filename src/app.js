@@ -34,6 +34,7 @@ function makeGraph() {
     for (i = 0; i < numOfNodes; i++) {
         graph.nodes.push({ 
             id:   i,
+            label: '' + i,
             x: Math.random(),
             y: Math.random(),
             size: 0.3,
