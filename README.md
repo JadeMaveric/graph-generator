@@ -3,14 +3,15 @@ A web app to dynamically generate graphs for DSA practicals
 ![sample image](https://i.ibb.co/0tWh162/Capture1.png "Graph Generator Sample")
 
 ### Install and usage instructions
-- Clone this repo and open `index.html`
-- Alternatively, use [the online version](https://jademaveric.github.io/graph-generator/)
-- Specify the number of nodes and edges
-- Hit generate (hit it again if you don't like what you see)
-- Drag any nodes to manually adjust (careful, this a fidgety feature)
-- Press download to save an image of the graph
+1. Clone this repo and open `index.html`
+   - Alternatively, use [the online version](https://jademaveric.github.io/graph-generator/)
+2. Specify the number of nodes and edges
+3. Hit generate
+   - Hit it again if you don't like what you see
+4. Drag any nodes to manually adjust (careful, this a fidgety feature)
+5. Press download to save an image of the graph
 
-_The project is essentially a webpage running web workers in the background. While running a local web server would be ideal. The project uses a local (frozen) version of [sigma.js](sigmajs.org "Sigma.js Home") to display graphs. So directly opening `index.html` works fine too._
+_The project is essentially a webpage running web workers in the background. While running a local web server would be ideal. The project uses a local (frozen) version of [sigma.js](sigmajs.org "Sigma.js Home") to display graphs. So directly opening `index.html` works fine too. Which means offline use is possible_
 
 ### Features
 - Generate graphs with a prerequisite number of nodes and edges.
