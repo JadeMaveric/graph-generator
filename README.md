@@ -22,7 +22,7 @@ _The project is essentially a webpage running web workers in the background. Whi
 ### Abstract Algorithm
 1. The program pseudorandomly generates nodes and edges based on parameters given to it and information it already knows.
 2. These nodes and edges are then passed to a Sigma instance which handles visualisation.
-3. A (physics simulation)[https://en.wikipedia.org/wiki/Force-directed_graph_drawing "Force-directed Graph Drawing"] is then run to achieve an aesthetic layout.
+3. A [physics simulation](https://en.wikipedia.org/wiki/Force-directed_graph_drawing "Force-directed Graph Drawing") is then run to achieve an aesthetic layout.
 
 #### Todo
 - Change label type (display each node as an encircled number)
